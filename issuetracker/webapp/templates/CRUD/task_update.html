@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
 {% block content %}
     <h2>Edit Task</h2>
     <form method="post">

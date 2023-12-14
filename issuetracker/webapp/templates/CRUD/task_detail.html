@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
-
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
 {% block content %}
-    <h2>{{ task.summary }}</h2>
-    <p>{{ task.description }}</p>
-    <p>Status: {{ task.status }}</p>
-    <p>Types:
+    <h2 style="font-size: 35px; margin-top: 20px">Задача: {{ task.summary }}</h2>
+    <p style="font-size: 22px;">Описание: {{ task.description }}</p>
+    <p style="font-size: 22px;">Статус: {{ task.status }}</p>
+    <p style="font-size: 22px;">Types:
         {% for type in task.task_types.all %}
             {{ type.name }}
             {% if not forloop.last %}, {% endif %}
         {% endfor %}
     </p>
-    <a href="{% url 'webapp:task_update' pk=task.pk %}">Редактировать</a>
-    <a href="{% url 'webapp:task_delete' pk=task.pk %}">Удалить</a>
-    <a href="{% url 'webapp:task_list' %}">Вернуться</a>
+    <a href="{% url 'webapp:task_update' pk=task.pk %}" style="font-size: 22px; text-decoration: none">Редактировать</a>
+    <a href="{% url 'webapp:task_delete' pk=task.pk %}" style="font-size: 22px; text-decoration: none; margin-left: 20px; margin-right: 20px">Удалить</a>
+    <a href="{% url 'webapp:task_list' %}" style="font-size: 22px; text-decoration: none">Вернуться</a>
 {% endblock %}

@@ -1,0 +1,21 @@
+<h1>Task List</h1>
+    <div class="row ">
+        {% for task in tasks %}
+            <div class="col my-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <a class="card-title" href="{% url 'webapp:task_detail' pk=task.pk %}"
+                           style="text-decoration: none; font-size: 22px; color: #212529">{{ task.summary }}</a>
+                        <div>
+                            <a href="{% url 'webapp:task_detail' pk=task.pk %}" class="card-link">Смотреть</a>
+                            <a href="{% url 'webapp:task_delete' pk=task.pk %}" class="card-link">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'webapp:task_create' %}"
+       style="font-size: 25px; border: 2px solid greenyellow; border-radius: 10px; text-decoration: none;
+       padding-left: 10px; padding-right: 10px; padding-bottom: 5px; padding-top: 5px">Добавить
+        задачу</a>

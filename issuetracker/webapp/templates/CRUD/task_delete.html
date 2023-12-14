@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
 {% block content %}
-  <h2>Confirm Delete</h2>
-  <p>Are you sure you want to delete '{{ task.summary }}'?</p>
+  <h2 style="margin-top: 30px">Подтвердите действие</h2>
+  <p style="font-size: 40px">Вы уверены что хотите удалить '{{ task.summary }}'?</p>
   <form method="post">
     {% csrf_token %}
-    <button type="submit">Подтвердить удаление</button>
+    <button type="submit" style="font-size: 22px">Подтвердить удаление</button>
   </form>
-  <a href="{% url 'webapp:task_list' %}">Отмена</a>
+  <a href="{% url 'webapp:task_list' %}" style="font-size: 25px; text-decoration: none;">Отмена</a>
 {% endblock %}

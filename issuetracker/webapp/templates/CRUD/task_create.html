@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
 {% block content %}
+    <div class="container" style="text-align: start">
     <h2>Create Task</h2>
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Создать</button>
+        <button type="submit" style="font-size: 25px">Создать</button>
     </form>
-    <a href="{% url 'webapp:task_list' %}">Вернуться</a>
+    <a href="{% url 'webapp:task_list' %}" style="font-size: 22px">Вернуться</a>
+    </div>>
 {% endblock %}

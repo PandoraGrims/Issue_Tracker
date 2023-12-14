@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
+
 {% block content %}
-  <h2>Task List</h2>
-  <ul>
-    {% for task in tasks %}
-      <li><a href="{% url 'webapp:task_detail' pk=task.pk %}">{{ task.summary }}</a></li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'webapp:task_create' %}">Добавить задачу</a>
+    {% include "partial/task_card.html" %}
 {% endblock %}
