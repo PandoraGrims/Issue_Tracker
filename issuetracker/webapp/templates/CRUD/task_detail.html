@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ task.summary }}</h2>
+    <p>{{ task.description }}</p>
+    <p>Status: {{ task.status }}</p>
+    <p>Type: {{ task.type }}</p>
+    <a href="{% url 'webapp:task_update' pk=task.pk %}">Редактировать</a>
+    <a href="{% url 'webapp:task_delete' pk=task.pk %}">Удалить</a>
+    <a href="{% url 'webapp:task_list' %}">Вернуться</a>
+{% endblock %}
