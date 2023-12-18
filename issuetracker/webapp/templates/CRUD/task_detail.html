@@ -7,12 +7,12 @@
     <p style="font-size: 22px;">Описание: {{ task.description }}</p>
     <p style="font-size: 22px;">Статус: {{ task.status }}</p>
     <p style="font-size: 22px;">Types:
-        {% for type in task.task_types.all %}
+        {% for type in task.types.all %}
             {{ type.name }}
             {% if not forloop.last %}, {% endif %}
         {% endfor %}
     </p>
-    <a href="{% url 'webapp:task_update' pk=task.pk %}" style="font-size: 22px; text-decoration: none">Редактировать</a>
-    <a href="{% url 'webapp:task_delete' pk=task.pk %}" style="font-size: 22px; text-decoration: none; margin-left: 20px; margin-right: 20px">Удалить</a>
+    <a href="{% url 'webapp:task_update' task.pk %}" style="font-size: 22px; text-decoration: none">Редактировать</a>
+    <a href="{% url 'webapp:task_delete' task.pk %}" style="font-size: 22px; text-decoration: none; margin-left: 20px; margin-right: 20px">Удалить</a>
     <a href="{% url 'webapp:task_list' %}" style="font-size: 22px; text-decoration: none">Вернуться</a>
 {% endblock %}

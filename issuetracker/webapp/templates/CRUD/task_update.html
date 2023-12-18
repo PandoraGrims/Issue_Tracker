@@ -3,11 +3,12 @@
     {% include "partial/link_header.html" %}
 {% endblock %}
 {% block content %}
-    <h2>Edit Task</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Сохранить</button>
+    <div class="container" style="text-align: start">
+    <h2>Изменить Задачу</h2>
+
+    <form action="" method="post">
+        {% include 'partial/form.html' with value_submit='Изменить' %}
     </form>
-    <a href="{% url 'webapp:task_list' %}">Вернуться</a>
+    <a href="{% url 'webapp:task_list' %}" style="font-size: 22px">Вернуться</a>
+    </div>>
 {% endblock %}

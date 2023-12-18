@@ -1,20 +1,10 @@
 from django import forms
-from .models import Task, Status, Type
+from .models import Status, Type
 
 
-class TaskCreateForm(forms.ModelForm):
-    class Meta:
-        model = Task
-        fields = ['summary', 'description', 'status', 'task_types']
-
-    status = forms.ModelChoiceField(queryset=Status.objects.all())
-    task_types = forms.ModelMultipleChoiceField(queryset=Type.objects.all())
-
-
-class TaskUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Task
-        fields = ['summary', 'description', 'status', 'task_types']
-
-    status = forms.ModelChoiceField(queryset=Status.objects.all())
-    task_types = forms.ModelMultipleChoiceField(queryset=Type.objects.all())
+class TaskForm(forms.Form):
+    summary = forms.CharField(max_length=300, label='Заголовок')
+    description = forms.CharField(widget=forms.Textarea, required=False, label='Полное_описание')
+    status = forms.ModelChoiceField(queryset=Status.objects.all(), label='Статус')
+    types = forms.ModelMultipleChoiceField(queryset=Type.objects.all(), label='Тип',
+                                           widget=forms.CheckboxSelectMultiple)
