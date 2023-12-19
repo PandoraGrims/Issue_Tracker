@@ -3,10 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.html import urlencode
-from webapp.forms import TaskForm, SearchForm, ProjectForm, UserForm
+from webapp.forms import TaskForm, SearchForm, ProjectForm
 from webapp.models import Task, Project
-from django.contrib.auth.models import User
-from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
