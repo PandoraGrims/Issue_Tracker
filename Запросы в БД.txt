@@ -1,0 +1,35 @@
+from webapp.models import Task
+from webapp.models import Status
+from webapp.models import Type
+from django.utils import timezone
+from datetime import timedelta
+current_date = timezone.now()
+one_month_ago = current_date - timedelta(days=30)
+closed_tasks_last_month = Task.objects.filter(
+    status__name='Done',
+    updated_at__gte=one_month_ago,
+    updated_at__lte=current_date
+)
+
+
+from webapp.models import Task
+from webapp.models import Status
+from webapp.models import Type
+desired_status_names = ['New', 'In Progress']
+desired_type_names = ['Task', 'Bug']
+tasks_with_desired_status_and_type = Task.objects.filter(
+    status__name__in=desired_status_names,
+    types__name__in=desired_type_names
+)
+
+
+
+from django.db import models
+from webapp.models import Task
+from webapp.models import Type
+keyword = 'bug'
+bug_related_tasks = Task.objects.filter(
+    (models.Q(status__name__in=['New', 'Done']) | models.Q(types__name='Bug')) &
+    (models.Q(summary__icontains=keyword) | models.Q(description__icontains=keyword)),
+    status__name='Done'
+)
