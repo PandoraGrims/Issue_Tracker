@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import View
 from django.views.generic import DeleteView, TemplateView, FormView
-from .models import Task
-from .forms import TaskForm
+from webapp.models import Task
+from webapp.forms import TaskForm
 
 
 class TaskListView(TemplateView):
     model = Task
-    template_name = 'task_list.html'
+    template_name = 'List/task_list.html'
     context_object_name = 'tasks'
 
     def get_context_data(self, **kwargs):
@@ -19,7 +19,7 @@ class TaskListView(TemplateView):
 
 class TaskDetailView(TemplateView):
     model = Task
-    template_name = 'CRUD/task_detail.html'
+    template_name = 'CRUDtask/task_detail.html'
     context_object_name = 'task'
 
     def get_context_data(self, **kwargs):
@@ -30,7 +30,7 @@ class TaskDetailView(TemplateView):
 
 
 class TaskCreateView(FormView):
-    template_name = 'CRUD/task_create.html'
+    template_name = 'CRUDtask/task_create.html'
     form_class = TaskForm
 
     def form_valid(self, form):
@@ -41,7 +41,7 @@ class TaskCreateView(FormView):
 
 
 class TaskUpdateView(FormView):
-    template_name = 'CRUD/task_update.html'
+    template_name = 'CRUDtask/task_update.html'
     form_class = TaskForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -65,7 +65,7 @@ class TaskUpdateView(FormView):
 
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = 'CRUD/task_delete.html'
+    template_name = 'CRUDtask/task_delete.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
