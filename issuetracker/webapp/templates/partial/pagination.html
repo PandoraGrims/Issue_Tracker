@@ -1,23 +1,28 @@
-<div class="pagination">
+<div class="pagination" style="background-color: orange; padding: 10px; text-align: center;">
     <span class="step-links">
-        <a href="?{% if query %}{{ query }}&{% endif %}page=1">&laquo; В начало</a>
+        <a href="?{% if query %}{{ query }}&{% endif %}page=1"
+           style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: white; background-color: #333; text-decoration: none; font-size: 20px;">&laquo; В начало</a>
         {% if page_obj.has_previous %}
-            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
+            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.previous_page_number }}"
+               style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: white; background-color: #333; text-decoration: none; font-size: 20px;">Назад</a>
         {% else %}
-            <span class="page-disabled">Назад</span>
+            <span class="page-disabled"
+                  style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: #888; background-color: #333; font-size: 20px;">Назад</span>
         {% endif %}
-        <form class="current-page" method="get">
+        <form class="current-page" method="get" style="display: inline-block; margin: 0 10px;">
             <input type="hidden" name="search" value="{{ search_value }}">
-            <label for="page">
-                Страница <input type="text" name="page" id="page" value="{{ page_obj.number }}">
-                из {{ page_obj.paginator.num_pages }}.
-            </label>
+            <label for="page" style="font-size: 20px; color: white;">Страница <input type="text" name="page" id="page"
+                                                                                     value="{{ page_obj.number }}"
+                                                                                     style="width: 40px; padding: 5px; font-size: 16px; border: 1px solid #ccc;"></label>
         </form>
         {% if page_obj.has_next %}
-            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}">Далее</a>
+            <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.next_page_number }}"
+               style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: white; background-color: #333; text-decoration: none; font-size: 20px;">Далее</a>
         {% else %}
-            <span class="page-disabled">Далее</span>
+            <span class="page-disabled"
+                  style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: #888; background-color: #333; font-size: 20px;">Далее</span>
         {% endif %}
-        <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}">В конец &raquo;</a>
+        <a href="?{% if query %}{{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}"
+           style="display: inline-block; padding: 8px 16px; margin: 0 4px; color: white; background-color: #333; text-decoration: none; font-size: 20px;">В конец &raquo;</a>
     </span>
 </div>
