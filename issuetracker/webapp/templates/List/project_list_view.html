@@ -1,64 +1,66 @@
 {% extends "base.html" %}
 {% block link %}
-
+    {% include "partial/link_header.html" %}
 {% endblock %}
 
 {% block content %}
 
-    <div class="title_head text-center pt-5 pb-5">
-        <h1 class="head-our-works" style="font-size: 80px">₱.℟.Ö.ჟ.Ҿ.₡.₮</h1>
-        <h2>╰────────╮• ✻ •╭────────╯</h2>
+    <div class="title_head text-center pt-2 pb-2">
+        <h1 class="head-our-works" style="font-size: 80px">PROJECTS</h1>
     </div>
     <br>
     {% include "partial/partial_form/search_form.html" %}
+
     <div class="container text-center">
+
         <div class="container-our-works pb-5 pt-5">
+        <div class="page_header m-0 pb-5">
+            {% if is_paginated %}
+                {% include 'partial/pagination.html' %}
+            {% endif %}
+        </div>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 {% for project in projects %}
                     <div class="col-xxl-4 col-lg-6 col-sm-12">
                         <div class="card card-our-works h-100"
-                             style="border: 3px solid #1395a9; background-color: #ce1565">
+                             style="background-color: darkgray">
                             <div class="card-body ">
                                 <p class="card-text card-text-1 text-uppercase"
                                    style="font-size: 36px;">{{ project.name }}</p>
                                 <p class="card-text card-text-1 text-uppercase"
                                    style="font-size: 24px;">Старт: {{ project.start_date }}</p>
+                                <p class="card-text card-text-1 text-uppercase"
+                                   style="font-size: 24px;">Конец: {{ project.end_date }}</p>
 
                             </div>
-                            <a class="card-link pt-3 pb-3 mx-3 my-3"
-                               href="{% url "webapp:project_detail_view" project.pk %}"
-                               style="border-top: 3px solid darkblue;border-radius: 5%">
+                            <a class="card-link pt-3"
+                               href="{% url "webapp:project_detail_view" project.pk %}">
                                 <button type="submit"
                                         class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
                                     Заглянуть в проект
                                 </button>
                             </a>
 
-                                <a class="card-link pt-3 pb-3" href="{% url "webapp:project_update_view" project.pk %}"
-                                   style="border-top: 3px solid darkblue;border-radius: 10%; background-color: #ce1565">
-                                    <button type="submit"
-                                            class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
-                                        Редактирование
-                                    </button>
-                                </a>
-                                <a class="card-link pt-3 pb-3" href="{% url "webapp:project_delete_view" project.pk %}"
-                                   style="border-top: 3px solid darkblue;border-radius: 10%; background-color: #ce1565">
-                                    <button type="submit"
-                                            class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
-                                        Удаление задачи
-                                    </button>
-                                </a>
+
+                            <a class="card-link pt-3 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
+                                <button type="submit"
+                                        class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
+                                    Удаление проекта
+                                </button>
+                            </a>
 
                         </div>
                     </div>
+                {% empty %}
+                    <h3>Результата нет</h3>
                 {% endfor %}
             </div>
         </div>
     </div>
     <div class="container text-center">
-        <div class="page_footer">
+        <div class="page_footer m-0 p-0">
             {% if is_paginated %}
-                {% include 'tasks/pagination.html' %}
+                {% include 'partial/pagination.html' %}
             {% endif %}
         </div>
     </div>

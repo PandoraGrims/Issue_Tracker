@@ -44,10 +44,11 @@ class TaskUpdateView(UpdateView):
     model = Task
     form_class = TaskForm
     template_name = "CRUDtask/task_update.html"
-    success_url = reverse_lazy("webapp:task_view")
 
     def get_success_url(self):
-        return reverse("webapp:task_view", kwargs={"pk": self.object.pk})
+        return reverse("webapp:project_detail_view", kwargs={"pk": self.object.project.pk})
+
+
 
 
 class TaskDeleteView(DeleteView):

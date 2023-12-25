@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
+{% block title %}Создание{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <h1 class="title_create_good pt-5 pb-4 text-center">Создание Проекта</h1>
+    <div class="d-flex justify-content-center">
+        <div class="card mb-3 text-center "
+             style="background-color: #ce1565; border: 3px solid darkblue; border-radius: 10%; width: 600px;">
+            <div class="card-body">
+                    {% include "partial/partial_form/projects_form.html" with button_text="Создать" %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

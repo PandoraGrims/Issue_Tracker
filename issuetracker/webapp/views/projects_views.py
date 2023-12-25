@@ -57,16 +57,16 @@ class ProjectDetailView(DetailView):
         return context
 
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(CreateView):
     model = Project
     form_class = ProjectForm
     template_name = "CRUDprojects/project_create_view.html"
 
     def get_success_url(self):
-        return reverse("webapp:project_detail_view", kwargs={"pk": self.object.pk})
+        return reverse("webapp:task_create", kwargs={"pk": self.object.pk})
 
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+class ProjectUpdateView(UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = "CRUDprojects/project_update_view.html"

@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
 
-</body>
-</html>
+{% block title %}Детали Проекта{% endblock %}
+
+{% block content %}
+
+
+    <div class="title_head text-center pt-5 pb-1">
+        <h1 class="head-our-works" style="font-size: 80px">PROJECTS</h1>
+    </div>
+
+    <div class="hbb_container" style="justify-content:center">
+        <div class="card mx-auto mb-3 mt-2 py-2"
+             style="max-width: 70%;background-color: darkolivegreen; text-align: center">
+
+            <div class="card-body">
+                <h1 class="card-title">
+                    Название: {{ project.name }}</h1>
+                <p class="card-text" style="font-size: 26px;">Описание: {{ project.description }}</p>
+
+                <p class="card-text"><small class="text-body-secondary" style="font-size: 22px">Старт: {{ project.start_date }}</small>
+                </p>
+                <p class="card-text"><small class="text-body-secondary" style="font-size: 22px">Окончание: {{ project.end_date }}</small>
+                </p>
+
+                <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_update_view" project.pk %}">
+                    <button type="submit"
+                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                        Редактирование
+                    </button>
+                </a>
+                <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
+                    <button type="submit"
+                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                        Удаление Проекта
+                    </button>
+                </a>
+                 <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:task_create" project.pk %}">
+                    <button type="submit"
+                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                        Добавить Задачу
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="title_head text-center pt-3 pb-2">
+        <h1 class="head-our-works" style="font-size: 35px">TASKS</h1>
+    </div>
+
+    <div class="container text-center">
+        <div class="container-our-works pb-5 pt-5">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for task in tasks %}
+                    <div class="col-xxl-4 col-lg-6 col-sm-12">
+                        <div class="card card-our-works h-100" style="background-color: darkgray">
+                            <div class="card-body ">
+                                <p class="card-text card-text-1 text-uppercase"
+                                   style="font-size: 26px;">Название:{{ task.summary }}</p>
+                                <p class="card-text card-text-1 text-uppercase"
+                                   style="font-size: 24px;">Статус: {{ task.status }}</p>
+                                {% for type in task.types.all %}
+                                    <p class="card-text card-text-1 text-uppercase"
+                                       style="font-size: 24px;">Тип: {{ type.name }}</p>
+                                {% endfor %}
+                                <p class="card-text card-text-1 text-uppercase"
+                                   style="font-size: 24px">{{ task.detailed_description }}</p>
+                                <p class="card-text card-text-1 text-uppercase"
+                                   style="font-size: 24px">{{ task.created_at }}</p>
+                            </div>
+                            <a class="card-link pt-2" href="{% url "webapp:task_detail" task.pk %}">
+                                <button type="submit"
+                                        class="btn btm-input btn-outline-warning btn-lg text-uppercase rounded-0">
+                                    Детальный просмотр задачи
+                                </button>
+                            </a>
+
+                            <a class="card-link pt-3 pb-3" href="{% url "webapp:task_update" task.pk %}">
+                                <button type="submit"
+                                        class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
+                                    Редактирование
+                                </button>
+                            </a>
+                            <a class="card-link pt-3 pb-3" href="{% url "webapp:task_delete" task.pk %}">
+                                <button type="submit"
+                                        class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
+                                    Удаление задачи
+                                </button>
+                            </a>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+
+        {% if is_paginated %}
+            {% include 'partial/pagination.html' %}
+        {% endif %}
+
+    </div>
+
+{% endblock %}
