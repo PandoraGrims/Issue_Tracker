@@ -46,8 +46,8 @@ class Task(models.Model):
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Полное_описание')
     status = models.ForeignKey('webapp.Status', on_delete=models.CASCADE)
     types = models.ManyToManyField('webapp.Type', related_name='tasks', verbose_name='Типы')
-    created_at = models.DateTimeField(verbose_name='Время создания', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='Время изменения', auto_now=True)
+    created_at = models.DateField(verbose_name='Время создания', auto_now_add=True)
+    updated_at = models.DateField(verbose_name='Время изменения', auto_now=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект', related_name='tasks',
                                 default=1)
 
