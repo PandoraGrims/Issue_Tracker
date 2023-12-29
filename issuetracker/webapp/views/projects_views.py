@@ -57,7 +57,7 @@ class ProjectDetailView(DetailView):
         return context
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
     template_name = "CRUDprojects/project_create_view.html"
@@ -66,7 +66,7 @@ class ProjectCreateView(CreateView):
         return reverse("webapp:task_create", kwargs={"pk": self.object.pk})
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
     template_name = "CRUDprojects/project_update_view.html"
