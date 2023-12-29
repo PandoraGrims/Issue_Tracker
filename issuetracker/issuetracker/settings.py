@@ -117,9 +117,8 @@ USE_TZ = True
 
 LOGIN_URL = "accounts:login"
 
-LOGIN_REDIRECT_URL = "webapp:index"
-
-LOGOUT_REDIRECT_URL = "webapp:index"
+LOGIN_REDIRECT_URL = 'webapp:index'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

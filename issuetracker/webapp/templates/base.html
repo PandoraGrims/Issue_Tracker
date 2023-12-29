@@ -17,6 +17,17 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% block link %}
                     {% endblock %}
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+{#
+                            <a class="nav-link px-5" aria-current="page" style="color: white" href="{% url 'accounts:logout' %}">Выход</a>
+{#
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link px-5" style="color: white" href="{% url "accounts:login" %}">Вход</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

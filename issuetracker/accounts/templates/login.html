@@ -1,4 +1,4 @@
-{% extends "base_html_my.html" %}
+{% extends "base.html" %}
 {% block content %}
     <h1 class="h1_down_head py-5" style="text-align: center">Вход</h1>
     <form action="" method="post" class="text-center w-50 ms-auto me-auto">
@@ -16,4 +16,8 @@
         </div>
         <button class="btn btn-outline-dark mt-3" type="submit">Войти</button>
     </form>
+    <div class="py-5">
+        <a style="font-size: 24px; color: black; font-weight: bold" href="{% url "webapp:index" %}">Вернуться на
+            главную</a>
+    </div>
 {% endblock %}
