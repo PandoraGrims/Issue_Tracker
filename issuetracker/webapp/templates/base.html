@@ -19,9 +19,10 @@
                     {% endblock %}
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-{#
-                            <a class="nav-link px-5" aria-current="page" style="color: white" href="{% url 'accounts:logout' %}">Выход</a>
-{#
+                            <form method="post" action="{% url 'accounts:logout' %}">
+                                {% csrf_token %}
+                                <button class="btn-link px-5" style="color: white" type="submit">Выход</button>
+                            </form>
                         </li>
                     {% else %}
                         <li class="nav-item">
