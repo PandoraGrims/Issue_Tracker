@@ -14,11 +14,11 @@
     <div class="container text-center">
 
         <div class="container-our-works pb-5 pt-5">
-        <div class="page_header m-0 pb-5">
-            {% if is_paginated %}
-                {% include 'partial/pagination.html' %}
-            {% endif %}
-        </div>
+            <div class="page_header m-0 pb-5">
+                {% if is_paginated %}
+                    {% include 'partial/pagination.html' %}
+                {% endif %}
+            </div>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 {% for project in projects %}
                     <div class="col-xxl-4 col-lg-6 col-sm-12">
@@ -41,14 +41,14 @@
                                 </button>
                             </a>
 
-
-                            <a class="card-link pt-3 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
-                                <button type="submit"
-                                        class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
-                                    Удаление проекта
-                                </button>
-                            </a>
-
+                            {% if perms.webapp.delete_project and request.user in project.users.all %}
+                                <a class="card-link pt-3 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
+                                    <button type="submit"
+                                            class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
+                                        Удаление проекта
+                                    </button>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% empty %}

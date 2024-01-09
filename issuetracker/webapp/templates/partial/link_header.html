@@ -5,11 +5,10 @@
            href="{% url "webapp:index" %}">Главная</a>
     </li>
 
-{#    <li class="nav-item nav_item_header text-center">#}
-{#        <a class="nav-link nav_link_header" href="{% url "webapp:task_create" %}" style="color: whitesmoke">Новая#}
-{#            задача</a>#}
-{#    </li>#}
-    <li class="nav-item nav_item_header text-center">
-        <a class="nav-link nav_link_header" href="{% url "webapp:project_create" %}" style="color: whitesmoke">Новый проект</a>
-    </li>
+    {% if perms.webapp.add_project %}
+        <li class="nav-item nav_item_header text-center">
+            <a class="nav-link nav_link_header" href="{% url "webapp:project_create" %}" style="color: whitesmoke">Создание проекта</a>
+        </li>
+    {% endif %}
+
 </div>

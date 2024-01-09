@@ -21,30 +21,48 @@
                     Название: {{ project.name }}</h1>
                 <p class="card-text" style="font-size: 26px;">Описание: {{ project.description }}</p>
 
-                <p class="card-text"><small class="text-body-secondary" style="font-size: 22px">Старт: {{ project.start_date }}</small>
+                <p class="card-text"><small class="text-body-secondary"
+                                            style="font-size: 22px">Старт: {{ project.start_date }}</small>
                 </p>
-                <p class="card-text"><small class="text-body-secondary" style="font-size: 22px">Окончание: {{ project.end_date }}</small>
+                <p class="card-text"><small class="text-body-secondary"
+                                            style="font-size: 22px">Окончание: {{ project.end_date }}</small>
                 </p>
 
-                <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_update_view" project.pk %}">
-                    <button type="submit"
-                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
-                        Редактирование
-                    </button>
-                </a>
-                <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
-                    <button type="submit"
-                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
-                        Удаление Проекта
-                    </button>
-                </a>
-                 <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:task_create" project.pk %}">
-                    <button type="submit"
-                            class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
-                        Добавить Задачу
-                    </button>
-                </a>
-
+                <p style="font-size: 25px; font-weight: bold">Пользователи {% for u in project.users.all %}/
+                    {{ u.username }}
+                {% endfor %}</p>
+                {% if perms.webapp.change_project and request.user in project.users.all %}
+                    <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_update_view" project.pk %}">
+                        <button type="submit"
+                                class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                            Редактирование
+                        </button>
+                    </a>
+                {% endif %}
+                {% if perms.webapp.delete_project and request.user in project.users.all %}
+                    <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:project_delete_view" project.pk %}">
+                        <button type="submit"
+                                class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                            Удаление Проекта
+                        </button>
+                    </a>
+                {% endif %}
+                {% if perms.webapp.create_task and request.user in project.users.all %}
+                    <a class="card-link pt-3 pt-4 pb-3" href="{% url "webapp:task_create" project.pk %}">
+                        <button type="submit"
+                                class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                            Добавить Задачу
+                        </button>
+                    </a>
+                {% endif %}
+                {% if perms.webapp.add_users_in_project and request.user in project.users.all %}
+                    <a class="card-link pt-3 pt-4  pb-3" href="{% url "webapp:project_users_change" project.pk %}">
+                        <button type="submit"
+                                class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">
+                            Добавить пользователя
+                        </button>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -73,26 +91,29 @@
                                 <p class="card-text card-text-1 text-uppercase"
                                    style="font-size: 24px">{{ task.created_at }}</p>
                             </div>
+
                             <a class="card-link pt-2" href="{% url "webapp:task_detail" task.pk %}">
                                 <button type="submit"
                                         class="btn btm-input btn-outline-warning btn-lg text-uppercase rounded-0">
                                     Детальный просмотр задачи
                                 </button>
                             </a>
-
-                            <a class="card-link pt-3 pb-3" href="{% url "webapp:task_update" task.pk %}">
-                                <button type="submit"
-                                        class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
-                                    Редактирование
-                                </button>
-                            </a>
-                            <a class="card-link pt-3 pb-3" href="{% url "webapp:task_delete" task.pk %}">
-                                <button type="submit"
-                                        class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
-                                    Удаление задачи
-                                </button>
-                            </a>
-
+                            {% if perms.webapp.change_task and request.user in project.users.all %}
+                                <a class="card-link pt-3 pb-3" href="{% url "webapp:task_update" task.pk %}">
+                                    <button type="submit"
+                                            class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
+                                        Редактирование
+                                    </button>
+                                </a>
+                            {% endif %}
+                            {% if perms.webapp.delete_task and request.user in project.users.all %}
+                                <a class="card-link pt-3 pb-3" href="{% url "webapp:task_delete" task.pk %}">
+                                    <button type="submit"
+                                            class="btn btm-input btn-outline-warning btn-md text-uppercase rounded-0">
+                                        Удаление задачи
+                                    </button>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
