@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block link %}
+    {% include "partial/link_header.html" %}
+{% endblock %}
+
+
+{% block content %}
+    {% include "partial/partial_form/form.html" with button_text="Сохранить" %}
+{% endblock %}
