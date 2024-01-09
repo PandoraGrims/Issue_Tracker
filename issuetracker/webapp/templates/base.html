@@ -18,15 +18,24 @@
                     {% block link %}
                     {% endblock %}
                     {% if request.user.is_authenticated %}
+                        <li class="nav-item mx-2">
+                            <a style="color: green; border-radius: 10px; text-decoration: none"
+                                    href="{% url "accounts:profile" request.user.pk %}">{{ request.user.username }} </a>
+
+                        </li>
                         <li class="nav-item">
                             <form method="post" action="{% url 'accounts:logout' %}">
                                 {% csrf_token %}
-                                <button class="btn-link px-5" style="color: white" type="submit">Выход</button>
+                                <button class="btn-link px-3" style="color: green; border-radius: 10px; text-decoration: none" type="submit">Выход</button>
                             </form>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link px-5" style="color: white" href="{% url "accounts:login" %}">Вход</a>
+                            <a class="nav-link" style="color: yellow; text-decoration: none"
+                               href="{% url "accounts:register" %}?next={{ request.path }}">Регистрация</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-5" style="color: green; border-radius: 10px; text-decoration: none" href="{% url "accounts:login" %}">Вход</a>
                         </li>
                     {% endif %}
                 </ul>

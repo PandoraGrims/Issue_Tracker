@@ -1,23 +1,49 @@
-{% csrf_token %}
+{#{% csrf_token %}#}
+{#{% for error in form.non_field_errors %}#}
+{##}
+{#    <p class="text-danger">{{ error }}</p>#}
+{##}
+{#{% endfor %}#}
+{##}
+{#{% for field in form %}#}
+{##}
+{#    <div class="mb-3">#}
+{##}
+{#        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>#}
+{#        {{ field }}#}
+{##}
+{#        {% for error in field.errors %}#}
+{#            <p class="text-danger">{{ error }}</p>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{##}
+{#{% endfor %}#}
+{##}
+{#<input type="submit" value="{{ value_submit }}"/>#}
+
+{##}
+{% if not fields_only %}
+    <form action="" method="post">
+
+    {% csrf_token %}
+{% endif %}
+
 {% for error in form.non_field_errors %}
-
-    <p class="text-danger">{{ error }}</p>
-
+    <p class="form-error">{{ error }}</p>
 {% endfor %}
+
 
 {% for field in form %}
-
-    <div class="mb-3">
-
-        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
-        {{ field }}
-
-        {% for error in field.errors %}
-            <p class="text-danger">{{ error }}</p>
-        {% endfor %}
-    </div>
-
+    <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+    {% for error in field.errors %}
+        <p class="form-error">{{ error }}</p>
+    {% endfor %}
+    <p>{{ field }}</p>
 {% endfor %}
 
-<input type="submit" value="{{ value_submit }}"/>
+<br/>
+{% if not fields_only %}
+    <input type="submit" value="{{ button_text }}"/>
 
+    </form>
+{% endif %}
