@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 
 class Project(models.Model):
@@ -7,6 +8,7 @@ class Project(models.Model):
     end_date = models.DateField(verbose_name='Дата окончания', null=True, blank=True)
     name = models.CharField(max_length=300, null=False, blank=False, verbose_name='Название')
     description = models.TextField(max_length=300, null=True, blank=True, verbose_name='Описание')
+    users = models.ManyToManyField(get_user_model(), related_name="projects", blank=True)
 
     def __str__(self):
         return f'{self.id}. {self.name}'
@@ -15,6 +17,9 @@ class Project(models.Model):
         db_table = 'projects'
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+        permissions = [
+            ('add_users_in_project', 'Добавить юзеров в проект')
+        ]
 
 
 class Status(models.Model):
